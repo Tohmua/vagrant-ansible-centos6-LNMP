@@ -1,0 +1,31 @@
+---
+- name: Install Redis
+  yum: name=redis state=latest enablerepo=remi
+
+- name: Auto Start Redis
+  command: chkconfig redis on
+  notify: restart redis
+
+- name: create phpredis client folder
+  command: mkdir /tmp/phpredis force=no  creates=/tmp/phpredis
+
+- name: download latest stable phpredis client
+  get_url: url=https://github.com/nicolasff/phpredis/archive/master.zip dest=/tmp/phpredis/master.zip
+
+- name: go to folder phpredis and unzip
+  command: chdir=/tmp/phpredis unzip master.zip
+
+- name: Do Phpize Redis
+  command: chdir=/tmp/phpredis/phpredis-master phpize
+
+- name: Configure
+  command: chdir=/tmp/phpredis/phpredis-master ./configure
+
+- name: Make Redis
+  command: chdir=/tmp/phpredis/phpredis-master make 
+
+- name: Make Install The Redis
+  command: chdir=/tmp/phpredis/phpredis-master make install
+
+- name: Add redis.so to php modules
+  copy: src=phpredis.ini dest=/etc/php.d/phpredis.ini force=yes
