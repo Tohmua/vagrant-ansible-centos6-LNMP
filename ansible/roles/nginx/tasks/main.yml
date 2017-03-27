@@ -1,9 +1,8 @@
 ---
-- name: Copy Ngixn Repo
-  template: src=nginx.repo.j2 dest=/etc/yum.repos.d/nginx.repo
-
 - name: Install Nginx
-  yum: name=nginx state=latest
+  yum:
+    name: nginx
+    state: latest
 
 - name: Add nginx to chkconfig
   command: chkconfig --add nginx

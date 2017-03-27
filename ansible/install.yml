@@ -1,14 +1,11 @@
 ---
-- hosts: vagrant
+- hosts: all
   sudo: yes
   roles:
-  - common
-  - swap
-  - mysql
+  - yum
+  - mysql-56
+  - php-56
   - nginx
-  - php-fpm-55
   - composer
-  - redis
-  - gearman
-  - rabbitmq
-  - varnish
+  # - php-fpm-55
+  # - redis

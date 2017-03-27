@@ -1,7 +1,7 @@
 server {
         listen          80;
-        server_name     {{ default_domain }};
-        root            /srv/www;
+        server_name     127.0.0.1;
+        root            /vagrant/iaptus;
         index           index.php;
 
         client_max_body_size 500M;
@@ -13,16 +13,16 @@ server {
         location ~ \.htaccess {
             deny all;
         }
-        
+
         location ~ \.php$ {
-                try_files $uri =404;                
+                try_files $uri =404;
                 fastcgi_index index.php;
-                fastcgi_pass  127.0.0.1:9000;                
+                fastcgi_pass  127.0.0.1:9000;
                 include       fastcgi_params;
                 fastcgi_param   SCRIPT_FILENAME    $document_root$fastcgi_script_name;
                 fastcgi_param   SCRIPT_NAME        $fastcgi_script_name;
         }
-        
+
         location ~ /\.ht {
             deny  all;
         }

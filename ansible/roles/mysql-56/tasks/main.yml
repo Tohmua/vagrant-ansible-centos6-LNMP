@@ -1,0 +1,43 @@
+---
+- name: install mysql server
+  yum:
+    name: mysql-community-server
+    state: latest
+
+- name: install mysql client
+  yum:
+    name: mysql-community-client
+    state: latest
+
+- name: install mysql python
+  yum:
+    name: MySQL-python
+    state: latest
+
+- name: install mysql python connector
+  yum:
+    name: mysql-connector-python
+    state: latest
+
+- name: Create Mysql configuration file
+  template: src=my.cnf.j2 dest=/etc/my.cnf
+
+- name: Start the MySQL service
+  service:
+    name: mysqld
+    state: started
+    enabled: true
+
+- name: update mysql root password for all root accounts
+  mysql_user: name={{ mysql_root_db_user }} host={{ item }} password={{ mysql_root_db_pass }}
+  run_once: true
+  with_items:
+   - 127.0.0.1
+   - ::1
+   - localhost
+
+- name: Create Mysql configuration file
+  template:
+    src: my-root.cnf.j2
+    dest: ~/.my.cnf
+  notify: restart mysql
