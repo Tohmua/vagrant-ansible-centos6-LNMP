@@ -3,6 +3,8 @@
 - NginX
 - MySQL 5.6
 - PHP 5.6
+- Node
+- NPM
 
 ### Run
 ```

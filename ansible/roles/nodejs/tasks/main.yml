@@ -1,0 +1,18 @@
+---
+- name: get nvm
+  become: true
+  become_user: vagrant
+  git: repo=https://github.com/creationix/nvm.git dest=~/.nvm
+
+- name: Source nvm in ~/.profile
+  become: true
+  become_user: vagrant
+  lineinfile:
+    dest: ~/.profile
+    line: "source ~/.nvm/nvm.sh"
+    create: yes
+
+- name: install nodejs
+  become: true
+  become_user: vagrant
+  shell: source ~/.profile && nvm install stable

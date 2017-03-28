@@ -1,0 +1,14 @@
+---
+- name: add bash_profile file
+  become: true
+  become_user: vagrant
+  template:
+    src: bash_profile
+    dest: ~/.bash_profile
+
+- name: add bashrc file
+  become: true
+  become_user: vagrant
+  template:
+    src: bashrc
+    dest: ~/.bashrc
