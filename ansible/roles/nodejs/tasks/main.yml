@@ -15,4 +15,4 @@
 - name: install nodejs
   become: true
   become_user: vagrant
-  shell: source ~/.profile && nvm install stable
+  shell: source ~/.profile && nvm install {{ node_version }}
