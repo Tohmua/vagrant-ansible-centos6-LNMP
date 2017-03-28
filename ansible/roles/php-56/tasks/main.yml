@@ -5,6 +5,26 @@
     state: latest
     enablerepo: remi,remi-php56
 
+- name: instal php-mbstring
+  yum:
+    name: php56-php-mbstring
+
+- name: instal php-pdo
+  yum:
+    name: php56-php-pdo
+    state: latest
+    state: latest
+
+- name: instal php-mbstring
+  yum:
+    name: php56-php-mysqlnd
+    state: latest
+
+- name: instal php-bcmath
+  yum:
+    name: php56-php-bcmath
+    state: latest
+
 - name: instal php-fpm
   yum:
     name: php56-php-fpm
