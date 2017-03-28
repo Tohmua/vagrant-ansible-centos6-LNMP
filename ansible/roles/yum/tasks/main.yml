@@ -1,8 +1,4 @@
 ---
-# - name: install the epel rpm from a remote repo
-#   yum:
-#     name: http://dl.fedoraproject.org/pub/epel/6/i386/epel-release-6-8.noarch.rpm
-#     state: present
 - name: install the epel rpm from a remote repo
   yum:
     name: epel-release
