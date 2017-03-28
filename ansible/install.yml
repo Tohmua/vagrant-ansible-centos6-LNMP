@@ -1,11 +1,12 @@
 ---
 - hosts: all
-  sudo: yes
+  become: true
+  become_user: root
   roles:
   - yum
   - mysql-56
   - php-56
+  - nodejs
   - nginx
   - composer
-  # - php-fpm-55
-  # - redis
+  - shell
