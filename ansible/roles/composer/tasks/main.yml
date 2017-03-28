@@ -1,3 +1,8 @@
 ---
 - name: Install PHP Composer
   shell: curl -sS https://getcomposer.org/installer | php56 && /bin/mv -f /home/vagrant/composer.phar /usr/local/bin/composer creates=/usr/local/bin/composer
+
+- name: Install Global Phing
+  become: true
+  become_user: vagrant
+  shell: php56 /usr/local/bin/composer global require phing/phing
