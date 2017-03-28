@@ -13,7 +13,6 @@
   yum:
     name: php56-php-pdo
     state: latest
-    state: latest
 
 - name: instal php-mbstring
   yum:
