@@ -10,3 +10,9 @@ mysql_root_db_user: root
 
 # MySQL Root Pass
 mysql_root_db_pass: root
+
+# NginX Server Root
+nginx_server_root: /vagrant
+
+# Node Version
+node_version: stable

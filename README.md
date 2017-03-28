@@ -8,6 +8,7 @@
 
 ### Run
 ```
+cp ansible/group_vars/all.example ansible/group_vars/all
 vagrant plugin install vagrant-vbguest
 vagrant up
 ```
