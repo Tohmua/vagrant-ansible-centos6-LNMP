@@ -1,7 +1,7 @@
 server {
         listen          80;
         server_name     127.0.0.1;
-        root            /vagrant/iaptus;
+        root            {{ nginx_server_root }};
         index           index.php;
 
         client_max_body_size 500M;
