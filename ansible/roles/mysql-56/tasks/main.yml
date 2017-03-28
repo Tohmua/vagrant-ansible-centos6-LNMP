@@ -29,15 +29,29 @@
     enabled: true
 
 - name: update mysql root password for all root accounts
-  mysql_user: name={{ mysql_root_db_user }} host={{ item }} password={{ mysql_root_db_pass }}
-  run_once: true
+  mysql_user: name={{ mysql_root_db_user }} host={{ item }} password={{ mysql_root_db_pass }} priv='*.*:ALL,GRANT'
   with_items:
+   - '%'
    - 127.0.0.1
    - ::1
+   - 'localhost.localdomain'
    - localhost
 
-- name: Create Mysql configuration file
+- name: Create root user Mysql configuration file
   template:
     src: my-root.cnf.j2
     dest: ~/.my.cnf
   notify: restart mysql
+
+- name: Create vagrant user Mysql configuration file
+  become: true
+  become_user: vagrant
+  template:
+    src: my-root.cnf.j2
+    dest: ~/.my.cnf
+  notify: restart mysql
+
+- name: ensure anonymous users are not in the database
+  mysql_user: name='' host={{ item }} state=absent
+  with_items:
+   - localhost
