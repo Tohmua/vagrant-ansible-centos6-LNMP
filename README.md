@@ -13,6 +13,9 @@ vagrant plugin install vagrant-vbguest
 vagrant up
 ```
 
+### Update Dependencies
+After changing any ansible settings just run `vagrant provision` to propergate the changes to the VM.
+
 ### Requirements
 - **git**
 
