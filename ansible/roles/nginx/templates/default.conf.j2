@@ -2,7 +2,7 @@ server {
         listen          80;
         server_name     127.0.0.1;
         root            {{ nginx_server_root }};
-        index           index.php;
+        index           index.php index.html index.htm;
 
         client_max_body_size 500M;
 
@@ -31,4 +31,11 @@ server {
             deny  all;
         }
 
+        error_page 404 /404.html;
+            location = /40x.html {
+        }
+
+        error_page 500 502 503 504 /50x.html;
+            location = /50x.html {
+        }
 }
