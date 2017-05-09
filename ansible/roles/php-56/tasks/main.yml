@@ -30,6 +30,40 @@
     state: latest
     enablerepo: remi,remi-php56
 
+- name: php.ini file
+  template:
+    src: php.ini
+    dest: /opt/remi/php56/root/etc/php.ini
+
+- name: www.cnf file
+  template:
+    src: www.conf
+    dest: /opt/remi/php56/root/etc/php-fpm.d/www.conf
+
+- name: set access log file
+  file:
+    state: directory
+    path: /var/log/php-fpm
+    mode: 0777
+
+- name: set access log file
+  file:
+    state: touch
+    dest: /var/log/php-fpm/access.log
+    mode: 0777
+
+- name: set error log file
+  file:
+    state: touch
+    dest: /var/log/php-fpm/error.log
+    mode: 0777
+
+- name: set slow log file
+  file:
+    state: touch
+    dest: /var/log/php-fpm/slow.log
+    mode: 0777
+
 - name: start php-fpm
   service:
     name: php56-php-fpm
