@@ -12,7 +12,7 @@ fi
 
 # User specific environment and startup programs
 
-PATH=$PATH:$HOME/bin:~/.composer/vendor/bin
+PATH=$PATH:$HOME/bin:~/.composer/vendor/bin:/usr/local/bin
 
 
 export PATH

@@ -27,4 +27,4 @@
 - name: Add packages to versionlock
   shell: yum versionlock {{ item }}
   with_items: "{{ versionlock_items }}"
-  when: ({{ versionlock_items }} is defined)
+  when: (versionlock_items is defined)

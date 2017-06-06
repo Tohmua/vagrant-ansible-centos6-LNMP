@@ -12,8 +12,8 @@ mysql_root_db_user: root
 mysql_root_db_pass: root
 
 # NginX Server Root
-nginx_server_root: /vagrant
-nginx_try_files: /index.php$is_args$args
+nginx_server_root: /vagrant/iaptus/html
+nginx_try_files: /slim.php$is_args$args
 
 # Node Version
 node_version: stable
