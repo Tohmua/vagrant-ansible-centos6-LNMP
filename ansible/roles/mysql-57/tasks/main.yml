@@ -3,6 +3,7 @@
   yum:
     name: mysql-community-server
     state: latest
+  register: mysql_install_packages
 
 - name: install mysql client
   yum:
@@ -28,8 +29,21 @@
     state: started
     enabled: true
 
+- name: Temp Root Config
+  shell: cat /var/log/mysqld.log | grep "temporary password" | cut -d ' ' -f 11
+  register: temporary_mysql_password
+
+- name: Create root Mysql configuration file
+  template:
+    src: my-default-root.cnf.j2
+    dest: ~/.my.cnf
+
+- name: testusers
+  shell: mysql --connect-expired-password -e "ALTER USER USER() IDENTIFIED BY '#!SomeLongPassword1234'"
+  when: (mysql_install_packages is defined and mysql_install_packages.changed)
+
 - name: update mysql root password for all root accounts
-  mysql_user: name={{ mysql_root_db_user }} host={{ item }} password={{ mysql_root_db_pass }} priv='*.*:ALL,GRANT'
+  mysql_user: name={{ mysql_root_db_user }} host={{ item }} password={{ mysql_root_db_pass }} priv='*.*:ALL,GRANT' login_user='root' login_password='#!SomeLongPassword1234'
   with_items:
    - '%'
    - 127.0.0.1
@@ -52,6 +66,9 @@
   notify: restart mysql
 
 - name: ensure anonymous users are not in the database
-  mysql_user: name='' host={{ item }} state=absent
-  with_items:
-   - localhost
+  mysql_user:
+    name: ''
+    host: localhost
+    state: absent
+    login_user: 'root'
+    login_password: '#!SomeLongPassword1234'

@@ -4,7 +4,7 @@
   become_user: root
   roles:
   - yum
-  - mysql-56
+  - mysql-57
   - php-56
   - nodejs
   - nginx

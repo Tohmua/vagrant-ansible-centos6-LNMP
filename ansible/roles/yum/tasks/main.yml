@@ -9,9 +9,9 @@
     name: http://rpms.famillecollet.com/enterprise/remi-release-6.rpm
     state: present
 
-- name: install the mysql 5.6 rpm from a remote repo
+- name: install the mysql 5.7 rpm from a remote repo
   yum:
-    name: http://repo.mysql.com/mysql-community-release-el6-5.noarch.rpm
+    name: http://repo.mysql.com/mysql57-community-release-el6.rpm
     state: present
 
 - name: add epel public key
