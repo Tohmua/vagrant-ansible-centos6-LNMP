@@ -1,7 +1,7 @@
 # Centos 6 LNMP Stack
 - Centos 6.5
 - NginX
-- MySQL 5.6
+- MySQL 5.7
 - PHP 5.6
 - Node
 - NPM
