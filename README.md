@@ -14,7 +14,7 @@ vagrant up
 ```
 
 ### Update Dependencies
-After changing any ansible settings just run `vagrant provision` to propergate the changes to the VM.
+After changing any ansible settings just run `vagrant provision` to propagate the changes to the VM.
 
 ### Requirements
 - **git**
