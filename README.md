@@ -32,3 +32,14 @@ After changing any ansible settings just run `vagrant provision` to propagate th
 - **Ansible**
 
   Install Ansible, instructions can be found here: [Ansible](http://docs.ansible.com/ansible/intro_installation.html#installing-the-control-machine)
+
+### Config File Location Inside The Virtual Machine
+**PHP set up** uses remi-safe repository with PHP-FPM FastCGI process
+* php.ini file is at : `/opt/remi/php56/root/etc/php.ini`
+* error log setting : `/var/log/php-fpm/error.log`
+* to restart PHP-FPM : `sudo service php-56-php-fpm restart`
+* Xdebug executable : `/opt/remi/php56/root/usr/lib64/php/modules/xdebug.so`
+* xdebug.ini file at : `/opt/remi/php56/root/etc/php.d/15-xdebug.ini`
+**Nginx**
+* nginx configuration : `/etc/nginx/nginx.conf`
+* to restart nginx : `sudo service nginx restart`
