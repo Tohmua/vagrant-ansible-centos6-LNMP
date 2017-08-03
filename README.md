@@ -45,4 +45,4 @@ After changing any ansible settings just run `vagrant provision` to propagate th
 
 **CentOS**
 - restart nginx : `sudo service nginx restart`
-- to restart PHP-FPM : `sudo service php-56-php-fpm restart`
+- to restart PHP-FPM : `sudo service php56-php-fpm restart`
