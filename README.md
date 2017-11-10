@@ -46,3 +46,9 @@ After changing any ansible settings just run `vagrant provision` to propagate th
 **CentOS**
 - restart nginx : `sudo service nginx restart`
 - to restart PHP-FPM : `sudo service php56-php-fpm restart`
+
+### Running multiple machines
+- Duplicate the `"default"` block in `Vagrantfile`
+- Rename `"default"` to something else (e.g. `"newVm"`)
+- Change both the host port (from `6612`) and the ip (from `192.168.33.35`)
+- Access new vm using `vagrant up newVm` and `vagrant ssh newVm`
