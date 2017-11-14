@@ -24,6 +24,11 @@
     name: php56-php-bcmath
     state: latest
 
+- name: instal php-soap
+  yum:
+    name: php56-php-soap
+    state: latest
+
 - name: instal php-xdebug
   yum:
     name: php56-php-pecl-xdebug
