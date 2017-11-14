@@ -17,9 +17,8 @@ Vagrant.configure("2") do |config|
 
     default.vm.provision "ansible" do |ansible|
       ansible.playbook = "ansible/install.yml"
-      # ansible.inventory_path = "ansible/hosts"
+      ansible.inventory_path = "ansible/hosts"
       ansible.verbose = true
-      ansible.sudo = true
     end
   end
 end
