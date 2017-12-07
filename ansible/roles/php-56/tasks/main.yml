@@ -19,6 +19,11 @@
     name: php56-php-mysqlnd
     state: latest
 
+- name: instal php-intl
+  yum:
+    name: php56-php-intl
+    state: latest
+
 - name: instal php-bcmath
   yum:
     name: php56-php-bcmath
