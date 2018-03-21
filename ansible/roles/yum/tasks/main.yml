@@ -19,6 +19,11 @@
     state: present
     key: https://dl.fedoraproject.org/pub/epel/RPM-GPG-KEY-EPEL-6
 
+- name: Update NSS (needed for github tls1.3)
+  yum:
+    name: nss
+    state: latest
+
 - name: Install yum-versionlock
   yum:
     name: yum-plugin-versionlock
