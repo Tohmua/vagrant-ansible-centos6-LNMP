@@ -19,4 +19,4 @@ nginx_try_files: /index.php$is_args$args
 node_version: stable
 
 # PHP Version
-php_version: 7.2
+php_version: 5.6
