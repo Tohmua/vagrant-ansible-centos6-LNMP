@@ -1,0 +1,101 @@
+---
+- name: instal php
+  yum:
+    name: php72
+    state: latest
+    enablerepo: remi,remi-php72
+
+- name: instal php-mbstring
+  yum:
+    name: php72-php-mbstring
+
+- name: instal php-pdo
+  yum:
+    name: php72-php-pdo
+    state: latest
+
+- name: instal php-mbstring
+  yum:
+    name: php72-php-mysqlnd
+    state: latest
+
+- name: instal php-intl
+  yum:
+    name: php72-php-intl
+    state: latest
+
+- name: instal php-bcmath
+  yum:
+    name: php72-php-bcmath
+    state: latest
+
+- name: instal php-soap
+  yum:
+    name: php72-php-soap
+    state: latest
+
+- name: instal php-xdebug
+  yum:
+    name: php72-php-pecl-xdebug
+    state: latest
+
+- name: instal php-xml
+  yum:
+    name: php72-php-xml
+    state: latest
+
+- name: install php-zip
+  yum:
+    name: php72-php-zip
+    state: latest
+
+- name: instal php-fpm
+  yum:
+    name: php72-php-fpm
+    state: latest
+    enablerepo: remi,remi-php72
+
+- name: set access log file
+  file:
+    state: directory
+    path: /var/log/php-fpm
+    mode: 0777
+
+- name: php.ini file
+  template:
+    src: php.ini
+    dest: /etc/opt/remi/php72/php.ini
+
+- name: www.cnf file
+  template:
+    src: www.conf
+    dest: /etc/opt/remi/php72/php-fpm.d/www.conf
+
+- name: set access log file
+  file:
+    state: touch
+    dest: /var/log/php-fpm/access.log
+    mode: 0777
+
+- name: set error log file
+  file:
+    state: touch
+    dest: /var/log/php-fpm/error.log
+    mode: 0777
+
+- name: set slow log file
+  file:
+    state: touch
+    dest: /var/log/php-fpm/slow.log
+    mode: 0777
+
+- name: start php-fpm
+  service:
+    name: php72-php-fpm
+    state: started
+    enabled: true
+
+- name: enable php72
+  template:
+    src: enablephp72.sh
+    dest: /etc/profile.d/enablephp72.sh
