@@ -3,6 +3,7 @@
   become: true
   become_user: root
   roles:
+  - check-variables
   - yum
   - mysql-57
   - { role: php-56, when: php_version == 5.6 }

@@ -1,4 +1,9 @@
 ---
+- name: Remove PHP 7.2
+  yum:
+    name: php72*
+    state: absent
+
 - name: instal php
   yum:
     name: php56
