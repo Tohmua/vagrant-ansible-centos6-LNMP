@@ -1,4 +1,8 @@
 ---
+- name: Stop PHP 7.2 starting
+  shell: rm /etc/profile.d/enablephp72.sh
+  ignore_errors: yes
+
 - name: Remove PHP 7.2
   yum:
     name: php72*
