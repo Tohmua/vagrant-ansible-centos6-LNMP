@@ -2,7 +2,7 @@
 - Centos 6.5
 - NginX
 - MySQL 5.7
-- PHP 5.6
+- PHP 5.6 / PHP 7.2
 - Node
 - NPM
 
@@ -12,6 +12,10 @@ cp ansible/group_vars/all.example ansible/group_vars/all
 vagrant plugin install vagrant-vbguest
 vagrant up
 ```
+
+### Change PHP Versions
+Edit `ansible/group_vars/all` with your favourite editor and change
+the `php_version` variable. 5.6 and 7.2 are the only allowed version numbers at this time.
 
 ### Update Dependencies
 After changing any ansible settings just run `vagrant provision` to propagate the changes to the VM.

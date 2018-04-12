@@ -1,74 +1,84 @@
 ---
-- name: Stop PHP 7.2 starting
-  shell: rm /etc/profile.d/enablephp72.sh
+- name: Stop PHP 5.6 starting
+  shell: rm /etc/profile.d/enablephp56.sh
   ignore_errors: yes
 
-- name: Remove PHP 7.2
+- name: Remove PHP 5.6
   yum:
-    name: php72*
+    name: php56*
     state: absent
 
 - name: instal php
   yum:
-    name: php56
+    name: php72
     state: latest
-    enablerepo: remi,remi-php56
+    enablerepo: remi,remi-php72
 
 - name: instal php-mbstring
   yum:
-    name: php56-php-mbstring
+    name: php72-php-mbstring
 
 - name: instal php-pdo
   yum:
-    name: php56-php-pdo
+    name: php72-php-pdo
     state: latest
 
 - name: instal php-mbstring
   yum:
-    name: php56-php-mysqlnd
+    name: php72-php-mysqlnd
     state: latest
 
 - name: instal php-intl
   yum:
-    name: php56-php-intl
+    name: php72-php-intl
     state: latest
 
 - name: instal php-bcmath
   yum:
-    name: php56-php-bcmath
+    name: php72-php-bcmath
     state: latest
 
 - name: instal php-soap
   yum:
-    name: php56-php-soap
+    name: php72-php-soap
     state: latest
 
 - name: instal php-xdebug
   yum:
-    name: php56-php-pecl-xdebug
+    name: php72-php-pecl-xdebug
+    state: latest
+
+- name: instal php-xml
+  yum:
+    name: php72-php-xml
+    state: latest
+
+- name: install php-zip
+  yum:
+    name: php72-php-zip
     state: latest
 
 - name: instal php-fpm
   yum:
-    name: php56-php-fpm
+    name: php72-php-fpm
     state: latest
-    enablerepo: remi,remi-php56
-
-- name: php.ini file
-  template:
-    src: php.ini
-    dest: /opt/remi/php56/root/etc/php.ini
-
-- name: www.cnf file
-  template:
-    src: www.conf
-    dest: /opt/remi/php56/root/etc/php-fpm.d/www.conf
+    enablerepo: remi,remi-php72
 
 - name: set access log file
   file:
     state: directory
     path: /var/log/php-fpm
     mode: 0777
+
+- name: php.ini file
+  template:
+    src: php.ini
+    dest: /etc/opt/remi/php72/php.ini
+
+- name: www.cnf file
+  template:
+    src: www.conf
+    dest: /etc/opt/remi/php72/php-fpm.d/www.conf
 
 - name: set access log file
   file:
@@ -90,11 +100,11 @@
 
 - name: start php-fpm
   service:
-    name: php56-php-fpm
+    name: php72-php-fpm
     state: started
     enabled: true
 
-- name: enable php56
+- name: enable php72
   template:
-    src: enablephp56.sh
-    dest: /etc/profile.d/enablephp56.sh
+    src: enablephp72.sh
+    dest: /etc/profile.d/enablephp72.sh
