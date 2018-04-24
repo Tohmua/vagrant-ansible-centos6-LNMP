@@ -16,3 +16,7 @@ PATH=$PATH:$HOME/bin:~/.composer/vendor/bin
 
 
 export PATH
+
+TZ='Europe/London';
+
+export TZ
