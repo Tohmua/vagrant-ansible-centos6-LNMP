@@ -18,6 +18,10 @@
   yum:
     name: php56-php-mbstring
 
+- name: instal php-mcrypt
+  yum:
+    name: php56-php-mcrypt
+
 - name: instal php-pdo
   yum:
     name: php56-php-pdo
