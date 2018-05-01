@@ -29,6 +29,10 @@
     name: yum-plugin-versionlock
     state: present
 
+- name: set timezone to Europe/London
+  timezone:
+    name: Europe/London
+
 - name: Add packages to versionlock
   shell: yum versionlock {{ item }}
   with_items: { versionlock_items }
