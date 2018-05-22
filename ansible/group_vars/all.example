@@ -19,7 +19,7 @@ nginx_try_files: /index.php$is_args$args
 node_version: stable
 
 # Timeout
-fastcgi_read_timeout: 300
+fastcgi_read_timeout: 60
 
 # PHP Version
 php_version: 5.6
