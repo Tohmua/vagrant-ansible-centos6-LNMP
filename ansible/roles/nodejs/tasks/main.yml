@@ -12,7 +12,7 @@
     line: "source ~/.nvm/nvm.sh"
     create: yes
 
-- name: install nodejs
+- name: install nodejs and yarn
   become: true
   become_user: vagrant
-  shell: source ~/.profile && nvm install {{ node_version }}
+  shell: source ~/.profile && nvm install {{ node_version }} && nvm use {{ node_version }} && npm install -g yarn

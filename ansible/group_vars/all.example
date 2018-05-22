@@ -20,3 +20,7 @@ node_version: stable
 
 # Timeout
 fastcgi_read_timeout: 300
+
+# PHP Version
+php_version: 5.6
+
