@@ -1,0 +1,4 @@
+---
+- name: Adding virtual hosts to hosts file
+  lineinfile: dest=/etc/hosts regexp='.*{{ item.host_name }}$' line="127.0.1.1 {{ item.host_name }}" state=present
+  with_items: "{{ virtual_hosts }}"

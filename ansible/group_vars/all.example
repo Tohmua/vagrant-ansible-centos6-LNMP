@@ -11,10 +11,6 @@ mysql_root_db_user: dbuser
 # MySQL Root Pass
 mysql_root_db_pass: 'SomeSuperLongPassword1234!'
 
-# NginX Server Root
-nginx_server_root: /vagrant
-nginx_try_files: /index.php$is_args$args
-
 # Node Version
 node_version: stable
 
@@ -24,3 +20,9 @@ fastcgi_read_timeout: 60
 # PHP Version
 php_version: 5.6
 
+# NginX Virtual Hosts
+virtual_hosts:
+    - name: example
+      host_name: example.test
+      server_root: /vagrant
+      try_files: /index.php$is_args$args
