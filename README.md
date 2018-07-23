@@ -13,12 +13,17 @@ vagrant plugin install vagrant-vbguest
 vagrant up
 ```
 
+### Add Virtual Hosts
+Add a new entry to the `virtual_hosts` dictionary in the `ansible/group_vars/all` file. Set the `host_name` to the virtual host that you would like to use.
+
+Add the following line `192.168.33.35 {host_name}` (where the `{host_name}` is the one from the `all` file) to your hosts file `/etc/hosts`
+
 ### Change PHP Versions
 Edit `ansible/group_vars/all` with your favourite editor and change
 the `php_version` variable. 5.6 and 7.2 are the only allowed version numbers at this time.
 
 ### Update Dependencies
-After changing any ansible settings just run `vagrant provision` to propagate the changes to the VM.
+After changing any ansible settings just run `vagrant up --provision` to propagate the changes to the VM.
 
 ### Requirements
 - **git**
