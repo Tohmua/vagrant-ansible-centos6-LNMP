@@ -68,6 +68,12 @@
     src: www.conf
     dest: /opt/remi/php56/root/etc/php-fpm.d/www.conf
 
+- name: create php session directory
+  file:
+    state: directory
+    path: /var/lib/php/session
+    mode: 0777
+
 - name: set access log file
   file:
     state: directory

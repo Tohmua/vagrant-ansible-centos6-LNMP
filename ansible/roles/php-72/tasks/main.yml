@@ -80,6 +80,12 @@
     src: www.conf
     dest: /etc/opt/remi/php72/php-fpm.d/www.conf
 
+- name: create php session directory
+  file:
+    state: directory
+    path: /var/lib/php/session
+    mode: 0777
+
 - name: set access log file
   file:
     state: touch
