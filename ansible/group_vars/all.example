@@ -25,4 +25,5 @@ virtual_hosts:
     - name: example
       host_name: example.test
       server_root: /vagrant
+      application_env: development
       try_files: /index.php$is_args$args
