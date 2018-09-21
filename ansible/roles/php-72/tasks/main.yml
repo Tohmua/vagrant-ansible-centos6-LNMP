@@ -58,6 +58,16 @@
     name: php72-php-zip
     state: latest
 
+- name: instal php-memcache
+  yum:
+    name: php72-php-pecl-memcache
+    state: latest
+
+- name: instal php-memcached
+  yum:
+    name: php72-php-pecl-memcached
+    state: latest
+
 - name: instal php-fpm
   yum:
     name: php72-php-fpm
