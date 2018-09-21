@@ -5,6 +5,7 @@
 - PHP 5.6 / PHP 7.2
 - Node
 - NPM
+- Memcache
 
 ### Run
 ```
