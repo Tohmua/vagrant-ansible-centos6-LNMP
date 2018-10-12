@@ -62,3 +62,10 @@ After changing any ansible settings just run `vagrant up --provision` to propaga
 - Rename `"default"` to something else (e.g. `"newVm"`)
 - Change both the host port (from `6612`) and the ip (from `192.168.33.35`)
 - Access new vm using `vagrant up newVm` and `vagrant ssh newVm`
+
+### Set PHP version
+Edit ansible/group_vars/all
+Set:
+```bash
+php_version: 7.2
+```
