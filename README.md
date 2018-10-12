@@ -64,8 +64,7 @@ After changing any ansible settings just run `vagrant up --provision` to propaga
 - Access new vm using `vagrant up newVm` and `vagrant ssh newVm`
 
 ### Set PHP version
-Edit ansible/group_vars/all
-Set:
+Edit `ansible/group_vars/all`:
 ```bash
 php_version: 7.2
 ```
