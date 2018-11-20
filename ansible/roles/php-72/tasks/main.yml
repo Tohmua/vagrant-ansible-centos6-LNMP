@@ -53,7 +53,7 @@
     name: php72-php-xml
     state: latest
 
-- name: installl php-zip
+- name: install php-zip
   yum:
     name: php72-php-zip
     state: latest
