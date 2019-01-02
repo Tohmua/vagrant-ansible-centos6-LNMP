@@ -18,7 +18,7 @@ node_version: stable
 fastcgi_read_timeout: 60
 
 # PHP Version
-php_version: 5.6
+php_version: "5.6"
 
 # NginX Virtual Hosts
 virtual_hosts:

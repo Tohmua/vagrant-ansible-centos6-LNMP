@@ -1,30 +1,18 @@
 ---
-- name: Install PHP Composer (PHP 5.6)
-  shell: curl -sS https://getcomposer.org/installer | php56 && /bin/mv -f /home/vagrant/composer.phar /usr/local/bin/composer creates=/usr/local/bin/composer
-  when: php_version == 5.6
+- name: Find PHP
+  find:
+    paths: /usr/bin/
+    patterns: ^php[0-9]+$
+    use_regex: yes
+    file_type: link
+  register: php_binarys
 
-- name: Install Global Phing (PHP 5.6)
+- name: Install PHP Composer
+  shell: "curl -sS https://getcomposer.org/installer | {{ item.path }} && /bin/mv -f /home/vagrant/composer.phar /usr/local/bin/composer creates=/usr/local/bin/composer"
+  with_items: "{{ php_binarys.files }}"
+
+- name: Install Global Phing
   become: true
   become_user: vagrant
-  shell: php56 /usr/local/bin/composer global require phing/phing
-  when: php_version == 5.6
-
-- name: Install PHP Composer (PHP 7.2)
-  shell: curl -sS https://getcomposer.org/installer | php72 && /bin/mv -f /home/vagrant/composer.phar /usr/local/bin/composer creates=/usr/local/bin/composer
-  when: php_version == 7.2
-
-- name: Install Global Phing (7.2)
-  become: true
-  become_user: vagrant
-  shell: php72 /usr/local/bin/composer global require phing/phing
-  when: php_version == 7.2
-
-- name: Install PHP Composer (PHP 7.3)
-  shell: curl -sS https://getcomposer.org/installer | php73 && /bin/mv -f /home/vagrant/composer.phar /usr/local/bin/composer creates=/usr/local/bin/composer
-  when: php_version == 7.3
-
-- name: Install Global Phing (7.3)
-  become: true
-  become_user: vagrant
-  shell: php73 /usr/local/bin/composer global require phing/phing
-  when: php_version == 7.3
+  shell: "{{ item.path }} /usr/local/bin/composer global require phing/phing"
+  with_items: "{{ php_binarys.files }}"
