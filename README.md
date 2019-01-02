@@ -2,7 +2,7 @@
 - Centos 6.5
 - NginX
 - MySQL 5.7
-- PHP 5.6 / PHP 7.2
+- PHP 5.6/7.2/7.3
 - Node
 - NPM
 - Memcache
