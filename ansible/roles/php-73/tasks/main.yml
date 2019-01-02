@@ -1,22 +1,4 @@
 ---
-- name: Stop PHP 5.6 starting
-  shell: rm /etc/profile.d/enablephp56.sh
-  ignore_errors: yes
-
-- name: Stop PHP 7.2 starting
-  shell: rm /etc/profile.d/enablephp72.sh
-  ignore_errors: yes
-
-- name: Remove PHP 5.6
-  yum:
-    name: php56*
-    state: absent
-
-- name: Remove PHP 7.2
-  yum:
-    name: php72*
-    state: absent
-
 - name: instal php
   yum:
     name: php73
@@ -32,7 +14,7 @@
     name: php73-php-pdo
     state: latest
 
-- name: instal php-mbstring
+- name: instal php-mysqlnd
   yum:
     name: php73-php-mysqlnd
     state: latest
