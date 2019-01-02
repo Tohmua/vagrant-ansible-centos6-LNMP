@@ -8,47 +8,47 @@
     name: php56*
     state: absent
 
-- name: instal php
+- name: install php
   yum:
     name: php72
     state: latest
     enablerepo: remi,remi-php72
 
-- name: instal php-mbstring
+- name: install php-mbstring
   yum:
     name: php72-php-mbstring
 
-- name: instal php-pdo
+- name: install php-pdo
   yum:
     name: php72-php-pdo
     state: latest
 
-- name: instal php-mbstring
+- name: install php-mbstring
   yum:
     name: php72-php-mysqlnd
     state: latest
 
-- name: instal php-intl
+- name: install php-intl
   yum:
     name: php72-php-intl
     state: latest
 
-- name: instal php-bcmath
+- name: install php-bcmath
   yum:
     name: php72-php-bcmath
     state: latest
 
-- name: instal php-soap
+- name: install php-soap
   yum:
     name: php72-php-soap
     state: latest
 
-- name: instal php-xdebug
+- name: install php-xdebug
   yum:
     name: php72-php-pecl-xdebug
     state: latest
 
-- name: instal php-xml
+- name: install php-xml
   yum:
     name: php72-php-xml
     state: latest
@@ -58,17 +58,17 @@
     name: php72-php-zip
     state: latest
 
-- name: instal php-memcache
+- name: install php-memcache
   yum:
     name: php72-php-pecl-memcache
     state: latest
 
-- name: instal php-memcached
+- name: install php-memcached
   yum:
     name: php72-php-pecl-memcached
     state: latest
 
-- name: instal php-fpm
+- name: install php-fpm
   yum:
     name: php72-php-fpm
     state: latest
