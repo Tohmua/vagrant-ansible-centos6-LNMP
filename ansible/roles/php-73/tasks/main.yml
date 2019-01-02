@@ -3,8 +3,8 @@
   shell: rm /etc/profile.d/enablephp56.sh
   ignore_errors: yes
 
-- name: Stop PHP 7.3 starting
-  shell: rm /etc/profile.d/enablephp73.sh
+- name: Stop PHP 7.2 starting
+  shell: rm /etc/profile.d/enablephp72.sh
   ignore_errors: yes
 
 - name: Remove PHP 5.6
@@ -12,71 +12,76 @@
     name: php56*
     state: absent
 
-- name: install php
+- name: Remove PHP 7.2
   yum:
-    name: php72
+    name: php72*
+    state: absent
+
+- name: instal php
+  yum:
+    name: php73
     state: latest
-    enablerepo: remi,remi-php72
+    enablerepo: remi,remi-php73
 
-- name: install php-mbstring
+- name: instal php-mbstring
   yum:
-    name: php72-php-mbstring
+    name: php73-php-mbstring
 
-- name: install php-pdo
+- name: instal php-pdo
   yum:
-    name: php72-php-pdo
-    state: latest
-
-- name: install php-mbstring
-  yum:
-    name: php72-php-mysqlnd
-    state: latest
-
-- name: install php-intl
-  yum:
-    name: php72-php-intl
+    name: php73-php-pdo
     state: latest
 
-- name: install php-bcmath
+- name: instal php-mbstring
   yum:
-    name: php72-php-bcmath
+    name: php73-php-mysqlnd
     state: latest
 
-- name: install php-soap
+- name: instal php-intl
   yum:
-    name: php72-php-soap
+    name: php73-php-intl
     state: latest
 
-- name: install php-xdebug
+- name: instal php-bcmath
   yum:
-    name: php72-php-pecl-xdebug
+    name: php73-php-bcmath
     state: latest
 
-- name: install php-xml
+- name: instal php-soap
   yum:
-    name: php72-php-xml
+    name: php73-php-soap
+    state: latest
+
+- name: instal php-xdebug
+  yum:
+    name: php73-php-pecl-xdebug
+    state: latest
+
+- name: instal php-xml
+  yum:
+    name: php73-php-xml
     state: latest
 
 - name: install php-zip
   yum:
-    name: php72-php-zip
+    name: php73-php-zip
     state: latest
 
-- name: install php-memcache
+- name: instal php-memcache
   yum:
-    name: php72-php-pecl-memcache
+    name: php73-php-pecl-memcache
     state: latest
 
-- name: install php-memcached
+- name: instal php-memcached
   yum:
-    name: php72-php-pecl-memcached
+    name: php73-php-pecl-memcached
     state: latest
 
-- name: install php-fpm
+- name: instal php-fpm
   yum:
-    name: php72-php-fpm
+    name: php73-php-fpm
     state: latest
-    enablerepo: remi,remi-php72
+    enablerepo: remi,remi-php73
 
 - name: set access log file
   file:
@@ -87,12 +92,12 @@
 - name: php.ini file
   template:
     src: php.ini
-    dest: /etc/opt/remi/php72/php.ini
+    dest: /etc/opt/remi/php73/php.ini
 
 - name: www.cnf file
   template:
     src: www.conf
-    dest: /etc/opt/remi/php72/php-fpm.d/www.conf
+    dest: /etc/opt/remi/php73/php-fpm.d/www.conf
 
 - name: create php session directory
   file:
@@ -120,11 +125,11 @@
 
 - name: start php-fpm
   service:
-    name: php72-php-fpm
+    name: php73-php-fpm
     state: started
     enabled: true
 
-- name: enable php72
+- name: enable php73
   template:
-    src: enablephp72.sh
-    dest: /etc/profile.d/enablephp72.sh
+    src: enablephp73.sh
+    dest: /etc/profile.d/enablephp73.sh
