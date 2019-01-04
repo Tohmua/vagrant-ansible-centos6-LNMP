@@ -13,8 +13,9 @@
   with_items: "{{ php_binarys.files }}"
 
 - name: Current PHP Version
-  shell: "echo '{{ php_version_string.results[0].stdout }}' | grep 'PHP [0-9]\\.[0-9]' -o | grep '[0-9]\\.[0-9]' -o"
+  shell: "echo '{{ item.stdout }}' | grep 'PHP [0-9]\\.[0-9]' -o | grep '[0-9]\\.[0-9]' -o"
   register: current_php_version
+  with_items: "{{ php_version_string.results }}"
 
 - name: Find Enable PHP Files
   find:
@@ -28,10 +29,10 @@
     path: "{{ item.path }}"
     state: absent
   with_items: "{{ start_php_files.files }}"
-  when: php_version != current_php_version.stdout
+  when: current_php_version.stdout is defined and php_version != current_php_version.stdout
 
 - name: Remove PHP
   yum:
     name: php*
     state: absent
-  when: php_version != current_php_version.stdout
+  when: current_php_version.stdout is defined and php_version != current_php_version.stdout
