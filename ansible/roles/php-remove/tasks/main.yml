@@ -24,15 +24,23 @@
     use_regex: no
   register: start_php_files
 
+- name: Stop Running Services
+  service:
+    name: "php{{ item.stdout | regex_replace('\\.', '') }}-php-fpm"
+    state: stopped
+    enabled: false
+  when: item.stdout is defined and php_version != item.stdout
+  with_items: "{{ current_php_version.results }}"
+
 - name: Stop PHP starting
   file:
     path: "{{ item.path }}"
     state: absent
   with_items: "{{ start_php_files.files }}"
-  when: current_php_version.stdout is defined and php_version != current_php_version.stdout
 
 - name: Remove PHP
   yum:
     name: php*
     state: absent
-  when: current_php_version.stdout is defined and php_version != current_php_version.stdout
+  when: item.stdout is defined and php_version != item.stdout
+  with_items: "{{ current_php_version.results }}"
