@@ -23,6 +23,27 @@
 - name: Create Mysql configuration file
   template: src=my.cnf.j2 dest=/etc/my.cnf
 
+- name: Set custom mysqld configuration
+  lineinfile:
+    path: /etc/my.cnf
+    line: '{{item.setting}}={{item.value}}'
+    insertafter: '\[mysqld\]'
+  with_items: "{{ mysqld | default([]) }}"
+
+- name: Set custom mysqld_safe configuration
+  lineinfile:
+    path: /etc/my.cnf
+    line: '{{item.setting}}={{item.value}}'
+    insertafter: '\[mysqld_safe\]'
+  with_items: "{{ mysqld_safe | default([]) }}"
+
+- name: Set custom client configuration
+  lineinfile:
+    path: /etc/my.cnf
+    line: '{{item.setting}}={{item.value}}'
+    insertafter: '\[client\]'
+  with_items: "{{ client | default([]) }}"
+
 - name: Start the MySQL service
   service:
     name: mysqld

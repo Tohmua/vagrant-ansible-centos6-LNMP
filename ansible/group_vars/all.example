@@ -11,6 +11,17 @@ mysql_root_db_user: dbuser
 # MySQL Root Pass
 mysql_root_db_pass: 'SomeSuperLongPassword1234!'
 
+# custom my.cnf settings
+#mysqld:
+#  - setting: 'group_concat_max_len'
+#    value: 1024
+#mysqld_safe:
+#  - setting: 'group_concat_max_len'
+#    value: 1024
+#client:
+#  - setting: 'group_concat_max_len'
+#    value: 1024
+
 # Node Version
 node_version: stable
 
