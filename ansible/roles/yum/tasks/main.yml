@@ -24,6 +24,11 @@
     name: nss
     state: latest
 
+- name: Install NC (NetCat)
+  yum:
+    name: nc
+    state: latest
+
 - name: Install yum-versionlock
   yum:
     name: yum-plugin-versionlock
