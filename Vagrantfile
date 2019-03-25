@@ -2,7 +2,7 @@
 # vi: set ft=ruby :
 Vagrant.configure("2") do |config|
   config.vm.define "default" do |default|
-    default.vm.box = "flat/centos6.5"
+    default.vm.box = "centos/6"
 
     default.vm.network "forwarded_port", guest: 3306, host: 6612
 
