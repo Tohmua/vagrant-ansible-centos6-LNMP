@@ -1,0 +1,3 @@
+# Disable SELinux; this is a dev env, and vagrant mounts over nfs, making relabelling difficult
+- selinux:
+    state: disabled
