@@ -1,5 +1,5 @@
 ---
-- name: Create Mysql configuration file
+- name: Create MySQL configuration file
   template: src=my.cnf.j2 dest=/etc/my.cnf
 
 - name: Set custom mysqld configuration
@@ -51,13 +51,13 @@
    - 'localhost.localdomain'
    - localhost
 
-- name: Create root user Mysql configuration file
+- name: Create root user MySQL configuration file
   template:
     src: my-root.cnf.j2
     dest: ~/.my.cnf
   notify: restart mysql
 
-- name: Create vagrant user Mysql configuration file
+- name: Create vagrant user MySQL configuration file
   become: true
   become_user: vagrant
   template:
