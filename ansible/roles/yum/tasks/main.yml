@@ -33,6 +33,7 @@
     - mysql-community-client
     - MySQL-python
     - mysql-connector-python
+    - memcached
 
 - name: Lock packages to required versions
   shell: yum versionlock {{ item }}
