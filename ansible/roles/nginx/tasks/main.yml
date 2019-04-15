@@ -1,9 +1,4 @@
 ---
-- name: Install Nginx
-  yum:
-    name: nginx
-    state: latest
-
 - name: Add nginx to chkconfig
   command: chkconfig --add nginx
 
