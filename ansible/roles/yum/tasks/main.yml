@@ -29,6 +29,10 @@
     - yum-plugin-versionlock
     - libselinux-python
     - git
+    - mysql-community-server
+    - mysql-community-client
+    - MySQL-python
+    - mysql-connector-python
 
 - name: Lock packages to required versions
   shell: yum versionlock {{ item }}

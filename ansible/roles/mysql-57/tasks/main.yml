@@ -1,25 +1,4 @@
 ---
-- name: install mysql server
-  yum:
-    name: mysql-community-server
-    state: latest
-  register: mysql_install_packages
-
-- name: install mysql client
-  yum:
-    name: mysql-community-client
-    state: latest
-
-- name: install mysql python
-  yum:
-    name: MySQL-python
-    state: latest
-
-- name: install mysql python connector
-  yum:
-    name: mysql-connector-python
-    state: latest
-
 - name: Create Mysql configuration file
   template: src=my.cnf.j2 dest=/etc/my.cnf
 
