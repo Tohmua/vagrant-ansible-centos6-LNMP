@@ -30,7 +30,7 @@
     enabled: true
 
 - name: Temp Root Config
-  shell: cat /var/log/mysqld.log | grep "temporary password" | cut -d ' ' -f 11
+  shell: grep "temporary password" /var/log/mysqld.log | cut -d ' ' -f 11
   register: temporary_mysql_password
 
 - name: Create root MySQL configuration file
