@@ -33,13 +33,13 @@
   shell: cat /var/log/mysqld.log | grep "temporary password" | cut -d ' ' -f 11
   register: temporary_mysql_password
 
-- name: Create root Mysql configuration file
+- name: Create root MySQL configuration file
   template:
     src: my-default-root.cnf.j2
     dest: ~/.my.cnf
 
 - name: testusers
-  shell: mysql --connect-expired-password -e "ALTER USER USER() IDENTIFIED BY '#!SomeLongPassword1234'"
+  shell: mysql --connect-expired-password -e "SET PASSWORD='#!SomeLongPassword1234'"
   when: (mysql_install_packages is defined and mysql_install_packages.changed)
 
 - name: update mysql root password for all root accounts
