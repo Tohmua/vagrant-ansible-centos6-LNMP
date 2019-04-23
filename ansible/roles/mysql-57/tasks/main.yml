@@ -52,6 +52,9 @@
     dest: ~/.my.cnf
   notify: restart mysql
 
+- name: Make the input settings less likely to destroy a whole SQL query
+  template: src=editrc dest=~/.editrc
+
 - name: Create vagrant user MySQL configuration file
   become: true
   become_user: vagrant
