@@ -45,10 +45,6 @@
   mysql_user: name={{ mysql_root_db_user }} host={{ item }} password={{ mysql_root_db_pass }} priv='*.*:ALL,GRANT' login_user='root' login_password='#!SomeLongPassword1234'
   with_items:
    - '%'
-   - 127.0.0.1
-   - ::1
-   - 'localhost.localdomain'
-   - localhost
 
 - name: Create root user MySQL configuration file
   template:
