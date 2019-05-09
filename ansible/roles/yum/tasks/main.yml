@@ -34,6 +34,16 @@
     name: yum-plugin-versionlock
     state: present
 
+- name: Install SELinux python bindings
+  yum:
+    name: libselinux-python
+    state: present
+
+- name: Install git
+  yum:
+    name: git
+    state: present
+
 - name: set timezone to Europe/London
   timezone:
     name: Europe/London

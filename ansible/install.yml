@@ -5,6 +5,7 @@
   roles:
   - check-variables
   - yum
+  - selinux
   - mysql-57
   - memcached
   - php-remove
