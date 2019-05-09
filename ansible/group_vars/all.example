@@ -22,8 +22,8 @@ mysql_root_db_pass: 'SomeSuperLongPassword1234!'
 #  - setting: 'group_concat_max_len'
 #    value: 1024
 
-# Node Version
-node_version: stable
+# Node Version - Node v11 is the latest that supports Centos6
+node_version: v11
 
 # Timeout
 fastcgi_read_timeout: 60
