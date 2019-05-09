@@ -1,9 +1,4 @@
 ---
-- name: Install memcached
-  yum:
-    name: memcached
-    state: latest
-
 - name: Add memcached to chkconfig
   command: chkconfig --add memcached
 

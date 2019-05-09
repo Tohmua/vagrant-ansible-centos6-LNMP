@@ -8,8 +8,10 @@
   register: php_binarys
 
 - name: Install PHP Composer
-  shell: "curl -sS https://getcomposer.org/installer | {{ item.path }} && /bin/mv -f /home/vagrant/composer.phar /usr/local/bin/composer creates=/usr/local/bin/composer"
-  with_items: "{{ php_binarys.files }}"
+  get_url:
+    url: https://getcomposer.org/composer.phar
+    dest: /usr/local/bin/composer
+    mode: 0755
 
 - name: Install Global Phing
   become: true
