@@ -1,6 +1,8 @@
 ---
 - name: Create MySQL configuration file
   template: src=my.cnf.j2 dest=/etc/my.cnf
+  changed_when: false
+  failed_when: false
 
 - name: Set custom mysqld configuration
   lineinfile:
@@ -8,6 +10,8 @@
     line: '{{item.setting}}={{item.value}}'
     insertafter: '\[mysqld\]'
   with_items: "{{ mysqld | default([]) }}"
+  changed_when: false
+  failed_when: false
 
 - name: Set custom mysqld_safe configuration
   lineinfile:
@@ -32,14 +36,19 @@
 - name: Temp Root Config
   shell: grep "temporary password" /var/log/mysqld.log | cut -d ' ' -f 11
   register: temporary_mysql_password
+  changed_when: false
+  failed_when: false
 
 - name: Create root MySQL configuration file
   template:
     src: my-default-root.cnf.j2
     dest: ~/.my.cnf
+  changed_when: false
+  failed_when: false
 
 - name: testusers
   shell: mysql --connect-expired-password -e "ALTER USER USER() IDENTIFIED BY '#!SomeLongPassword1234'"
+  changed_when: false
   failed_when: false
 
 - name: update mysql root password for all root accounts
@@ -52,6 +61,8 @@
     src: my-root.cnf.j2
     dest: ~/.my.cnf
   notify: restart mysql
+  changed_when: false
+  failed_when: false
 
 - name: Make the input settings less likely to destroy a whole SQL query
   template: src=editrc dest=~/.editrc

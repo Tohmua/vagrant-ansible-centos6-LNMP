@@ -3,3 +3,5 @@
   service:
     name: mysqld
     state: restarted
+  changed_when: false
+  failed_when: false
