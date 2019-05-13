@@ -40,6 +40,7 @@
 
 - name: testusers
   shell: mysql --connect-expired-password -e "ALTER USER USER() IDENTIFIED BY '#!SomeLongPassword1234'"
+  failed_when: false
 
 - name: update mysql root password for all root accounts
   mysql_user: name={{ mysql_root_db_user }} host={{ item }} password={{ mysql_root_db_pass }} priv='*.*:ALL,GRANT' login_user='root' login_password='#!SomeLongPassword1234'
