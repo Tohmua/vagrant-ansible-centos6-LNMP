@@ -25,7 +25,7 @@
   become_user: vagrant
   shell: source ~/.profile && nvm install {{ node_version }}
   register: command_result
-  changed_when: command_result.stdout | regex_search(current_node_version.stdout) == false
+  changed_when: "current_node_version.stdout not in command_result.stdout"
 
 - name: install yarn
   become: true
