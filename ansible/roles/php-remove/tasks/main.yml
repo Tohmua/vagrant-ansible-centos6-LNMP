@@ -40,6 +40,7 @@
   file:
     path: "{{ item.path }}"
     state: absent
+  when: (php_version | string | regex_replace('\\.', '')) not in (item.path | string)
   with_items: "{{ start_php_files.files }}"
 
 - name: Remove PHP
