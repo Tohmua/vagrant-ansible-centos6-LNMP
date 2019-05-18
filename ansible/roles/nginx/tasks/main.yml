@@ -2,7 +2,6 @@
 - name: Add nginx to chkconfig
   command: chkconfig --add nginx
   changed_when: false
-  failed_when: false
 
 - name: Copy nginx default configuration
   template: src=default.conf.j2 dest=/etc/nginx/conf.d/{{ item.host_name }}.conf
@@ -12,4 +11,3 @@
   command: chkconfig --levels 235 nginx on
   notify: restart nginx
   changed_when: false
-  failed_when: false
