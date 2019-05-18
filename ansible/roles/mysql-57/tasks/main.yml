@@ -11,7 +11,6 @@
     insertafter: '\[mysqld\]'
   with_items: "{{ mysqld | default([]) }}"
   changed_when: false
-  failed_when: false
 
 - name: Set custom mysqld_safe configuration
   lineinfile:
@@ -19,6 +18,7 @@
     line: '{{item.setting}}={{item.value}}'
     insertafter: '\[mysqld_safe\]'
   with_items: "{{ mysqld_safe | default([]) }}"
+  changed_when: false
 
 - name: Set custom client configuration
   lineinfile:
@@ -26,6 +26,7 @@
     line: '{{item.setting}}={{item.value}}'
     insertafter: '\[client\]'
   with_items: "{{ client | default([]) }}"
+  changed_when: false
 
 - name: Start the MySQL service
   service:
