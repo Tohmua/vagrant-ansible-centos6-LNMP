@@ -47,7 +47,6 @@
     dest: /var/log/php-fpm/access.log
     mode: 0777
   changed_when: false
-  failed_when: false
 
 - name: set error log file
   file:
@@ -55,7 +54,6 @@
     dest: /var/log/php-fpm/error.log
     mode: 0777
   changed_when: false
-  failed_when: false
 
 - name: set slow log file
   file:
@@ -63,7 +61,6 @@
     dest: /var/log/php-fpm/slow.log
     mode: 0777
   changed_when: false
-  failed_when: false
 
 - name: start php-fpm
   service:
