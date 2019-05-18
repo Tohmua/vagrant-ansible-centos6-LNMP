@@ -18,5 +18,5 @@
   become_user: vagrant
   shell: "{{ item.path }} /usr/local/bin/composer global require phing/phing"
   with_items: "{{ php_binarys.files }}"
-  changed_when: false
-  failed_when: false
+  register: response
+  changed_when: "'Nothing to install or update' not in response.stderr"
