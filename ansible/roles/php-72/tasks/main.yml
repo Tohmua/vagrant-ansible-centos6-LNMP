@@ -47,18 +47,21 @@
     state: touch
     dest: /var/log/php-fpm/access.log
     mode: 0777
+  changed_when: false
 
 - name: set error log file
   file:
     state: touch
     dest: /var/log/php-fpm/error.log
     mode: 0777
+  changed_when: false
 
 - name: set slow log file
   file:
     state: touch
     dest: /var/log/php-fpm/slow.log
     mode: 0777
+  changed_when: false
 
 - name: start php-fpm
   service:

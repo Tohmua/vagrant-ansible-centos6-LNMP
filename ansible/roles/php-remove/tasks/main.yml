@@ -11,11 +11,15 @@
   shell: "{{ item.path }} -v"
   register: php_version_string
   with_items: "{{ php_binarys.files }}"
+  changed_when: false
+  failed_when: false
 
 - name: Current PHP Version
   shell: "echo '{{ item.stdout }}' | grep 'PHP [0-9]\\.[0-9]' -o | grep '[0-9]\\.[0-9]' -o"
   register: current_php_version
   with_items: "{{ php_version_string.results }}"
+  changed_when: false
+  failed_when: false
 
 - name: Find Enable PHP Files
   find:
@@ -36,6 +40,7 @@
   file:
     path: "{{ item.path }}"
     state: absent
+  when: (php_version | string | regex_replace('\\.', '')) not in (item.path | string)
   with_items: "{{ start_php_files.files }}"
 
 - name: Remove PHP
