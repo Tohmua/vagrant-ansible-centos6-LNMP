@@ -13,10 +13,16 @@
     dest: /usr/local/bin/composer
     mode: 0755
 
+- name: Remove Global Phing
+  become: true
+  become_user: vagrant
+  shell: "{{ item.path }} /usr/local/bin/composer global remove phing/phing"
+  with_items: "{{ php_binarys.files }}"
+  changed_when: false
+
 - name: Install Global Phing
   become: true
   become_user: vagrant
   shell: "{{ item.path }} /usr/local/bin/composer global require phing/phing"
   with_items: "{{ php_binarys.files }}"
-  register: response
-  changed_when: "'Nothing to install or update' not in response.stderr"
+  changed_when: false
