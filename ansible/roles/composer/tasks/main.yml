@@ -18,7 +18,9 @@
   become_user: vagrant
   shell: "{{ item.path }} /usr/local/bin/composer global remove phing/phing"
   with_items: "{{ php_binarys.files }}"
+  register: response
   changed_when: false
+  failed_when: "response.stdout and not 'Could not read ./composer.json' in response.stderr"
 
 - name: Install Global Phing
   become: true
