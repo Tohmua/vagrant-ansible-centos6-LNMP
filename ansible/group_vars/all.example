@@ -2,6 +2,10 @@
 # Username
 username: vagrant
 
+# Custom bash
+bash:
+  - alias hi="echo 'Hi'"
+
 # You shouldn't need to change this.
 mysql_port: 3306
 
