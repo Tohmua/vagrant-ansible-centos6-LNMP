@@ -12,3 +12,14 @@
   template:
     src: bashrc
     dest: ~/.bashrc
+  changed_when: false
+
+- name: insert custom bash scripts
+  become: true
+  become_user: vagrant
+  lineinfile:
+    path: ~/.bashrc
+    line: '{{ item }}'
+    insertafter: 'EOF'
+  with_items: "{{ bash | default([]) }}"
+  changed_when: false
