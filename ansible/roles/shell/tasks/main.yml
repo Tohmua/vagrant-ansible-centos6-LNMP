@@ -23,3 +23,37 @@
     insertafter: 'EOF'
   with_items: "{{ bash | default([]) }}"
   changed_when: false
+
+- name: add file relating to xdebug environment variables setting
+  become: true
+  become_user: vagrant
+  template:
+    src: xdebug_start_vars
+    dest: ~/.xdebug_start_vars
+  when: xdebug|d(False) == True
+  changed_when: false
+
+- name: add file relating to xdebug environment variables unsetting
+  become: true
+  become_user: vagrant
+  template:
+    src: xdebug_stop_vars
+    dest: ~/.xdebug_stop_vars
+  when: xdebug|d(False) == True
+  changed_when: false
+
+- name: insert aliase to use xdebug on cli scripts easily
+  become: true
+  become_user: vagrant
+  blockinfile:
+    path: ~/.bashrc
+    block: |
+      alias xdebugstart="source ~/.xdebug_start_vars"
+      alias xdebugstop="source ~/.xdebug_stop_vars"
+    insertafter: 'EOF'
+  when: xdebug|d(False) == True
+  changed_when: false
+
+- name: validate ~/.bashrc after changes
+  command: bash -n ~/.bashrc
+  changed_when: false

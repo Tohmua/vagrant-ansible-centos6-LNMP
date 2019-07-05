@@ -31,6 +31,12 @@
     src: php.ini
     dest: /etc/opt/remi/php73/php.ini
 
+- name: xdebug.ini file
+  template:
+    src: xdebug.ini
+    dest: /etc/opt/remi/php73/php.d/15-xdebug.ini
+  when: xdebug|d(False) == True
+
 - name: www.cnf file
   template:
     src: www.conf

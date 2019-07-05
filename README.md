@@ -26,8 +26,11 @@ Edit `ansible/group_vars/all` with your favourite editor and change
 the `php_version` variable. 5.6, 7.2 and 7.3 are the only allowed version numbers at this time.
 
 ### Provision with Xdebug enabled
-Edit `ansible/group_vars/all` with your favourite editor and change
-the `xdebug` variable from false (default) to true.
+Edit `ansible/group_vars/all` with your favourite editor and change the `xdebug` variable from 
+false (default) to true. Add appropriate value to `xdebug_ide_key` variable e.g. "PHPSTORM".
+You will then need to set up your IDE to listen to incoming Xdebug connections on port 9001 (default is 9000 but clashes
+with PHP-FPM). When xdebug is true bash aliases are made available for setting and unsetting environment variables 
+to aid command line debugging - see 'xdebugstart' and 'xdebugstop' in ~/.bashrc.
 
 ### Update Dependencies / Reprovision
 **After changing any ansible settings you must run `vagrant up --provision` to propagate the changes to the VM**.

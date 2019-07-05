@@ -34,7 +34,7 @@
   template:
     src: xdebug.ini
     dest: /opt/remi/php56/root/etc/php.d/15-xdebug.ini
-  when: xdebug | default(False) is True
+  when: xdebug|d(False) == True
 
 - name: www.cnf file
   template:
