@@ -1,27 +1,8 @@
 ---
-- name: install mysql server
-  yum:
-    name: mysql-community-server
-    state: latest
-  register: mysql_install_packages
-
-- name: install mysql client
-  yum:
-    name: mysql-community-client
-    state: latest
-
-- name: install mysql python
-  yum:
-    name: MySQL-python
-    state: latest
-
-- name: install mysql python connector
-  yum:
-    name: mysql-connector-python
-    state: latest
-
-- name: Create Mysql configuration file
+- name: Create MySQL configuration file
   template: src=my.cnf.j2 dest=/etc/my.cnf
+  changed_when: false
+  failed_when: false
 
 - name: Set custom mysqld configuration
   lineinfile:
@@ -29,6 +10,7 @@
     line: '{{item.setting}}={{item.value}}'
     insertafter: '\[mysqld\]'
   with_items: "{{ mysqld | default([]) }}"
+  changed_when: false
 
 - name: Set custom mysqld_safe configuration
   lineinfile:
@@ -36,6 +18,7 @@
     line: '{{item.setting}}={{item.value}}'
     insertafter: '\[mysqld_safe\]'
   with_items: "{{ mysqld_safe | default([]) }}"
+  changed_when: false
 
 - name: Set custom client configuration
   lineinfile:
@@ -43,6 +26,7 @@
     line: '{{item.setting}}={{item.value}}'
     insertafter: '\[client\]'
   with_items: "{{ client | default([]) }}"
+  changed_when: false
 
 - name: Start the MySQL service
   service:
@@ -51,34 +35,40 @@
     enabled: true
 
 - name: Temp Root Config
-  shell: cat /var/log/mysqld.log | grep "temporary password" | cut -d ' ' -f 11
+  shell: grep "temporary password" /var/log/mysqld.log | cut -d ' ' -f 11
   register: temporary_mysql_password
+  changed_when: false
+  failed_when: false
 
-- name: Create root Mysql configuration file
+- name: Create root MySQL configuration file
   template:
     src: my-default-root.cnf.j2
     dest: ~/.my.cnf
+  changed_when: false
+  failed_when: false
 
 - name: testusers
   shell: mysql --connect-expired-password -e "ALTER USER USER() IDENTIFIED BY '#!SomeLongPassword1234'"
-  when: (mysql_install_packages is defined and mysql_install_packages.changed)
+  changed_when: false
+  failed_when: false
 
 - name: update mysql root password for all root accounts
   mysql_user: name={{ mysql_root_db_user }} host={{ item }} password={{ mysql_root_db_pass }} priv='*.*:ALL,GRANT' login_user='root' login_password='#!SomeLongPassword1234'
   with_items:
    - '%'
-   - 127.0.0.1
-   - ::1
-   - 'localhost.localdomain'
-   - localhost
 
-- name: Create root user Mysql configuration file
+- name: Create root user MySQL configuration file
   template:
     src: my-root.cnf.j2
     dest: ~/.my.cnf
   notify: restart mysql
+  changed_when: false
+  failed_when: false
 
-- name: Create vagrant user Mysql configuration file
+- name: Make the input settings less likely to destroy a whole SQL query
+  template: src=editrc dest=~/.editrc
+
+- name: Create vagrant user MySQL configuration file
   become: true
   become_user: vagrant
   template:

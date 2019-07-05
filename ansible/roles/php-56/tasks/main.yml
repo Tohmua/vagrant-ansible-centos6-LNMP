@@ -1,63 +1,29 @@
 ---
-- name: install php
+- name: install php 5.6
   yum:
-    name: php56
+    name: "{{ packages }}"
     state: latest
     enablerepo: remi,remi-php56
+  vars:
+    packages:
+    - php56
+    - php56-php-mbstring
+    - php56-php-pdo
+    - php56-php-mysqlnd
+    - php56-php-intl
+    - php56-php-bcmath
+    - php56-php-soap
+    - php56-php-pecl-xdebug
+    - php56-php-pecl-memcache
+    - php56-php-pecl-memcached
+    - php56-php-mcrypt
+    - php56-php-fpm
 
-- name: install php-mbstring
-  yum:
-    name: php56-php-mbstring
-
-- name: install php-mcrypt
-  yum:
-    name: php56-php-mcrypt
-
-- name: install php-pdo
-  yum:
-    name: php56-php-pdo
-    state: latest
-
-- name: install php-mysqlnd
-  yum:
-    name: php56-php-mysqlnd
-    state: latest
-
-- name: install php-intl
-  yum:
-    name: php56-php-intl
-    state: latest
-
-- name: install php-bcmath
-  yum:
-    name: php56-php-bcmath
-    state: latest
-
-- name: install php-soap
-  yum:
-    name: php56-php-soap
-    state: latest
-
-- name: install php-xdebug
-  yum:
-    name: php56-php-pecl-xdebug
-    state: latest
-
-- name: install php-memcache
-  yum:
-    name: php56-php-pecl-memcache
-    state: latest
-
-- name: install php-memcached
-  yum:
-    name: php56-php-pecl-memcached
-    state: latest
-
-- name: install php-fpm
-  yum:
-    name: php56-php-fpm
-    state: latest
-    enablerepo: remi,remi-php56
+- name: set access log file
+  file:
+    state: directory
+    path: /var/log/php-fpm
+    mode: 0777
 
 - name: php.ini file
   template:
@@ -83,27 +49,24 @@
 
 - name: set access log file
   file:
-    state: directory
-    path: /var/log/php-fpm
-    mode: 0777
-
-- name: set access log file
-  file:
     state: touch
     dest: /var/log/php-fpm/access.log
     mode: 0777
+  changed_when: false
 
 - name: set error log file
   file:
     state: touch
     dest: /var/log/php-fpm/error.log
     mode: 0777
+  changed_when: false
 
 - name: set slow log file
   file:
     state: touch
     dest: /var/log/php-fpm/slow.log
     mode: 0777
+  changed_when: false
 
 - name: start php-fpm
   service:

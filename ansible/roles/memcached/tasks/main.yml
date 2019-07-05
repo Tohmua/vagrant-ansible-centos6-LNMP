@@ -1,12 +1,11 @@
 ---
-- name: Install memcached
-  yum:
-    name: memcached
-    state: latest
-
 - name: Add memcached to chkconfig
   command: chkconfig --add memcached
+  changed_when: false
+  failed_when: false
 
 - name: Auto start memcached
   command: chkconfig --levels 235 memcached on
   notify: restart memcached
+  changed_when: false
+  failed_when: false

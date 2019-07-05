@@ -4,41 +4,39 @@
     name: epel-release
     state: latest
 
-- name: install the remi rpm from a remote repo
+- name: setup third party repositories (remi, mysql-community)
   yum:
-    name: http://rpms.famillecollet.com/enterprise/remi-release-6.rpm
+    name: "{{ packages }}"
     state: present
-
-- name: install the mysql 5.7 rpm from a remote repo
-  yum:
-    name: http://repo.mysql.com/mysql57-community-release-el6.rpm
-    state: present
-
+  vars:
+    packages:
+    - http://rpms.famillecollet.com/enterprise/remi-release-6.rpm
+    - http://repo.mysql.com/mysql57-community-release-el6.rpm
+  
 - name: add epel public key
   rpm_key:
     state: present
     key: https://dl.fedoraproject.org/pub/epel/RPM-GPG-KEY-EPEL-6
 
-- name: Update NSS (needed for github tls1.3)
+- name: update/install required packages
   yum:
-    name: nss
+    name: "{{ packages }}"
     state: latest
+  vars:
+    packages:
+    - nss
+    - nc
+    - yum-plugin-versionlock
+    - libselinux-python
+    - git
+    - mysql-community-server
+    - mysql-community-client
+    - MySQL-python
+    - mysql-connector-python
+    - memcached
+    - nginx
 
-- name: Install NC (NetCat)
-  yum:
-    name: nc
-    state: latest
-
-- name: Install yum-versionlock
-  yum:
-    name: yum-plugin-versionlock
-    state: present
-
-- name: set timezone to Europe/London
-  timezone:
-    name: Europe/London
-
-- name: Add packages to versionlock
+- name: Lock packages to required versions
   shell: yum versionlock {{ item }}
   with_items: { versionlock_items }
   when: (versionlock_items is defined)

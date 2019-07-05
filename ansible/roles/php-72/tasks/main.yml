@@ -1,69 +1,24 @@
 ---
-- name: install php
+- name: install php 7.2
   yum:
-    name: php72
+    name: "{{ packages }}"
     state: latest
     enablerepo: remi,remi-php72
-
-- name: install php-mbstring
-  yum:
-    name: php72-php-mbstring
-
-- name: install php-pdo
-  yum:
-    name: php72-php-pdo
-    state: latest
-
-- name: install php-mysqlnd
-  yum:
-    name: php72-php-mysqlnd
-    state: latest
-
-- name: install php-intl
-  yum:
-    name: php72-php-intl
-    state: latest
-
-- name: install php-bcmath
-  yum:
-    name: php72-php-bcmath
-    state: latest
-
-- name: install php-soap
-  yum:
-    name: php72-php-soap
-    state: latest
-
-- name: install php-xdebug
-  yum:
-    name: php72-php-pecl-xdebug
-    state: latest
-
-- name: install php-xml
-  yum:
-    name: php72-php-xml
-    state: latest
-
-- name: install php-zip
-  yum:
-    name: php72-php-zip
-    state: latest
-
-- name: install php-memcache
-  yum:
-    name: php72-php-pecl-memcache
-    state: latest
-
-- name: install php-memcached
-  yum:
-    name: php72-php-pecl-memcached
-    state: latest
-
-- name: install php-fpm
-  yum:
-    name: php72-php-fpm
-    state: latest
-    enablerepo: remi,remi-php72
+  vars:
+    packages:
+    - php72
+    - php72-php-mbstring
+    - php72-php-pdo
+    - php72-php-mysqlnd
+    - php72-php-intl
+    - php72-php-bcmath
+    - php72-php-soap
+    - php72-php-pecl-xdebug
+    - php72-php-xml
+    - php72-php-zip
+    - php72-php-pecl-memcache
+    - php72-php-pecl-memcached
+    - php72-php-fpm
 
 - name: set access log file
   file:
@@ -92,18 +47,21 @@
     state: touch
     dest: /var/log/php-fpm/access.log
     mode: 0777
+  changed_when: false
 
 - name: set error log file
   file:
     state: touch
     dest: /var/log/php-fpm/error.log
     mode: 0777
+  changed_when: false
 
 - name: set slow log file
   file:
     state: touch
     dest: /var/log/php-fpm/slow.log
     mode: 0777
+  changed_when: false
 
 - name: start php-fpm
   service:

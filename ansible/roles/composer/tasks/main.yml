@@ -8,11 +8,23 @@
   register: php_binarys
 
 - name: Install PHP Composer
-  shell: "curl -sS https://getcomposer.org/installer | {{ item.path }} && /bin/mv -f /home/vagrant/composer.phar /usr/local/bin/composer creates=/usr/local/bin/composer"
+  get_url:
+    url: https://getcomposer.org/composer.phar
+    dest: /usr/local/bin/composer
+    mode: 0755
+
+- name: Remove Global Phing
+  become: true
+  become_user: vagrant
+  shell: "{{ item.path }} /usr/local/bin/composer global remove phing/phing"
   with_items: "{{ php_binarys.files }}"
+  register: response
+  changed_when: false
+  failed_when: "response.stdout and not 'Could not read ./composer.json' in response.stderr"
 
 - name: Install Global Phing
   become: true
   become_user: vagrant
   shell: "{{ item.path }} /usr/local/bin/composer global require phing/phing"
   with_items: "{{ php_binarys.files }}"
+  changed_when: false

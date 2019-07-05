@@ -4,7 +4,9 @@
   become_user: root
   roles:
   - check-variables
+  - core
   - yum
+  - selinux
   - mysql-57
   - memcached
   - php-remove
