@@ -64,6 +64,12 @@
     src: php.ini
     dest: /opt/remi/php56/root/etc/php.ini
 
+- name: xdebug.ini file
+  template:
+    src: xdebug.ini
+    dest: /opt/remi/php56/root/etc/php.d/15-xdebug.ini
+  when: xdebug | default(False) is True
+
 - name: www.cnf file
   template:
     src: www.conf
