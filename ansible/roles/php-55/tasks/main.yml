@@ -1,0 +1,71 @@
+---
+- name: install php 5.5
+  yum:
+    name: "{{ packages }}"
+    state: latest
+    enablerepo: remi,remi-php55
+  vars:
+    packages:
+    - php55
+    - php55-php-mbstring
+    - php55-php-pdo
+    - php55-php-mysqlnd
+    - php55-php-intl
+    - php55-php-bcmath
+    - php55-php-soap
+    - php55-php-pecl-xdebug
+    - php55-php-pecl-memcache
+    - php55-php-pecl-memcached
+    - php55-php-mcrypt
+    - php55-php-fpm
+
+- name: set access log file
+  file:
+    state: directory
+    path: /var/log/php-fpm
+    mode: 0777
+
+- name: php.ini file
+  template:
+    src: php.ini
+    dest: /opt/remi/php55/root/etc/php.ini
+
+- name: www.cnf file
+  template:
+    src: www.conf
+    dest: /opt/remi/php55/root/etc/php-fpm.d/www.conf
+
+- name: create php session directory
+  file:
+    state: directory
+    path: /var/lib/php/session
+    mode: 0777
+
+- name: set access log file
+  file:
+    state: touch
+    dest: /var/log/php-fpm/access.log
+    mode: 0777
+
+- name: set error log file
+  file:
+    state: touch
+    dest: /var/log/php-fpm/error.log
+    mode: 0777
+
+- name: set slow log file
+  file:
+    state: touch
+    dest: /var/log/php-fpm/slow.log
+    mode: 0777
+
+- name: start php-fpm
+  service:
+    name: php55-php-fpm
+    state: started
+    enabled: true
+
+- name: enable php55
+  template:
+    src: enablephp55.sh
+    dest: /etc/profile.d/enablephp55.sh
