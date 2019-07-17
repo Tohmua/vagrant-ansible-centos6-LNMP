@@ -2,6 +2,7 @@
 - fail:
     msg: "Invalid PHP Version"
   when:
+    - php_version != "5.5"
     - php_version != "5.6"
     - php_version != "7.2"
     - php_version != "7.3"
