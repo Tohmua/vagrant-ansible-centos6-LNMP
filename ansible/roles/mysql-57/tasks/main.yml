@@ -28,6 +28,13 @@
   with_items: "{{ client | default([]) }}"
   changed_when: false
 
+- name: Overwrite default group concat max length
+  lineinfile:
+    path: /etc/my.cnf
+    line: 'group_concat_max_len=15360'
+    insertafter: 'sql_mode=NO_ENGINE_SUBSTITUTION'
+  changed_when: false
+
 - name: Start the MySQL service
   service:
     name: mysqld
