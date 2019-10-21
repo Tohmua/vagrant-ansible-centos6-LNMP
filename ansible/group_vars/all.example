@@ -33,7 +33,12 @@ node_version: v11
 fastcgi_read_timeout: 60
 
 # PHP Version
-php_version: "5.6"
+php_version: "7.2"
+
+# Xdebug Setting - set to true for enabled xdebug.ini settings and cli environment variables commands
+# set appropriate value for xdebug_ide_key e.g. "PHPSTORM"
+xdebug: false
+xdebug_ide_key: "EXAMPLEIDE"
 
 # NginX Virtual Hosts
 virtual_hosts:

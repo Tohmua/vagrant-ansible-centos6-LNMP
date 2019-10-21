@@ -30,6 +30,22 @@
     src: php.ini
     dest: /opt/remi/php56/root/etc/php.ini
 
+- name: xdebug.ini file
+  template:
+    src: xdebug.ini
+    dest: /opt/remi/php56/root/etc/php.d/15-xdebug.ini
+  when: xdebug|d(False) == True
+
+- name: edit xdebug.idekey value
+  lineinfile:
+    path: /opt/remi/php56/root/etc/php.d/15-xdebug.ini
+    regexp: '^;xdebug\.idekey = \*complex\*'
+    line: 'xdebug.idekey = {{ xdebug_ide_key }}'
+    state: present
+  when:
+    - xdebug|d(False) == True
+    - xdebug_ide_key is defined
+
 - name: www.cnf file
   template:
     src: www.conf
